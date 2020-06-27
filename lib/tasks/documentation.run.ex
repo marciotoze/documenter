@@ -29,7 +29,7 @@ defmodule Mix.Tasks.Documentation.Run do
     end
 
     semantic_release_bin = "deps/documenter/node_modules/semantic-release/bin/semantic-release.js"
-    repo = Project.config()[:source_url]
+    repo = Project.config()[:source_url] <> ".git"
 
     params = ["-r", repo]
 
