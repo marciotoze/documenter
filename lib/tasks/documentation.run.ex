@@ -46,12 +46,14 @@ defmodule Mix.Tasks.Documentation.Run do
   defp create_doc(), do: Mix.Tasks.Docs.run([])
 
   defp create_api_doc do
-    input_dir = "#{File.cwd!()}/lib/#{Project.config()[:app]}_web/controllers"
+    input_dir = "#{File.cwd!()}"
+    filter = ".*\\.ex"
+
     output_dir = "#{File.cwd!()}/doc/apidoc/"
     template_dir = "deps/documenter/node_modules/dash-apidoc-template/template/"
     apidoc_bin = "deps/documenter/node_modules/apidoc/bin/apidoc"
 
-    params = ["-i", input_dir, "-o", output_dir, "-t", template_dir]
+    params = ["-i", input_dir, "-o", output_dir, "-t", template_dir, "-f", filter]
 
     case System.cmd("node", [apidoc_bin | params]) do
       {_, 0} ->
